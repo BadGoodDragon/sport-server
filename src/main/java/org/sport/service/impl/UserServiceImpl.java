@@ -49,4 +49,9 @@ public class UserServiceImpl implements UserService {
     public void deleteByName(String username) {
         userRepository.deleteById(username);
     }
+
+    @Override
+    public User getNameByToken(String token) {
+        return userRepository.findByToken(token);
+    }
 }

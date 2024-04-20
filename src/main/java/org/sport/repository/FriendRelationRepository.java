@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface FriendRelationRepository extends JpaRepository<FriendRelation, Long> {
     List<FriendRelation> findAllByOwner(String username);
+    FriendRelation findByOwnerAndSlave(String owner, String slave);
 }

@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class FriendOutProfile {
     private String username;
     private String photo;
+    private Double longtitude;
+    private Double latitude;
 }

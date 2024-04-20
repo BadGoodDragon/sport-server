@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +29,7 @@ public class ProfileServiceImpl implements ProfileService {
 
         for (FriendRelation midl : midlData) {
             User u = userRepository.findByUsername(midl.getSlave());
-            result.add(new FriendOutProfile(u.getUsername(), u.getPhoto()));
+            result.add(new FriendOutProfile(u.getUsername(), u.getPhoto(), u.getLongtitude(), u.getLatitude()));
         }
 
         return result;
@@ -42,6 +43,8 @@ public class ProfileServiceImpl implements ProfileService {
 
         userDto.setUsername(user.getUsername());
         userDto.setPhoto(user.getPhoto());
+        userDto.setLatitude(user.getLatitude());
+        userDto.setLongtitude(user.getLongtitude());
 
         return userDto;
     }
@@ -56,14 +59,40 @@ public class ProfileServiceImpl implements ProfileService {
 
         userDto.setUsername(userProfile.getUsername());
         userDto.setPhoto(userProfile.getPhoto());
+        userDto.setLatitude(userProfile.getLatitude());
+        userDto.setLongtitude(userProfile.getLongtitude());
         userDto.setFriendList(friendList);
-
 
         return userDto;
     }
 
     @Override
     public void addFriend(String owner, String slave) {
+
+        if (owner.equals(slave)) {
+            throw new RuntimeException("DONT MAKE FRIEND WITH YOURSELF");
+        }
+
+        User ownerUser = userRepository.findByUsername(owner);
+
+        if (ownerUser == null) {
+            return;
+        }
+
+        User slaveUser = userRepository.findByUsername(slave);
+
+        if (slaveUser == null) {
+            return;
+        }
+
+
+        FriendRelation friendRelationForward = friendRelationRepository.findByOwnerAndSlave(owner, slave);
+
+        if (friendRelationForward != null) {
+            return;
+        }
+
+
         FriendRelation forward = new FriendRelation();
         forward.setOwner(owner);
         forward.setSlave(slave);

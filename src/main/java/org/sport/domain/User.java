@@ -1,16 +1,11 @@
 package org.sport.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
+import jakarta.persistence.*;
 import java.util.Collection;
 
 @Data
@@ -19,7 +14,7 @@ import java.util.Collection;
 @Builder
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+public class User {
     @Id
     @Column(name = "username", unique = true)
     private String username;
@@ -34,31 +29,8 @@ public class User implements UserDetails {
 
     @Column(name = "latitude")
     private Double latitude;
-    private Authority authority;
 
+    @Column(name = "token", unique = true)
+    private String token;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
 }

@@ -14,4 +14,6 @@ import java.util.List;
 public class UserOutProfile {
     private String username;
     private String photo;
+    private Double longtitude;
+    private Double latitude;
 }

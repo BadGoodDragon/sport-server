@@ -10,4 +10,5 @@ public interface UserService {
     User getByName(String username);
     User update(String username, User user);
     void deleteByName(String username);
+    User getNameByToken(String token);
 }
