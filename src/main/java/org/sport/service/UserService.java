@@ -9,6 +9,8 @@ public interface UserService {
     List<User> getAll();
     User getByName(String username);
     User update(String username, User user);
+    User updateCoords(String username, User user);
     void deleteByName(String username);
-    User getNameByToken(String token);
+    User getByToken(String token);
+    User updateToken(String username, User user);
 }
