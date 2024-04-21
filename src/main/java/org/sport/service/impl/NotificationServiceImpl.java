@@ -1,6 +1,7 @@
 package org.sport.service.impl;
 
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.sport.domain.Notification;
 import org.sport.repository.NotificationRepository;
@@ -20,6 +21,7 @@ public class NotificationServiceImpl implements NotificationService {
         notificationRepository.save(notification);
     }
 
+    @Transactional
     @Override
     public List<Notification> getAndDelete(String username) {
         List<Notification> result = notificationRepository.findAllByRecipient(username);
