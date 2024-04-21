@@ -35,10 +35,32 @@ public class NotificationController {
         return notifications;
     }
 
+    @GetMapping("/notificationBasic")
+    private List<Notification> getNotificationsBasic(@RequestHeader("Authorization") String authorization) {
+        String username = userService.getByName(Authorization.parseBasicUsername(authorization)).getUsername();
+
+        List<Notification> notifications = notificationService.getAndDelete(username);
+
+        return notifications;
+    }
+
     @PostMapping("/notification")
     private void addNotification(@RequestHeader("Authorization") String bearerToken, @RequestParam(name = "receiver") String receiver) {
         String token = Authorization.parseBearer(bearerToken);
         User user = userService.getByToken(token);
+
+        if (user == null) {
+            throw new RuntimeException("Такого пользователя не существует!");
+        }
+
+        // Добавление уведомления
+        notificationService.add(receiver, user.getUsername(), getRandomTask());
+    }
+
+    @PostMapping("/notificationBasic")
+    private void addNotificationBasic(@RequestHeader("Authorization") String authorization, @RequestParam(name = "receiver") String receiver) {
+
+        User user = userService.getByName(Authorization.parseBasicUsername(authorization));
 
         if (user == null) {
             throw new RuntimeException("Такого пользователя не существует!");
