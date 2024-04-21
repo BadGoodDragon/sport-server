@@ -28,6 +28,7 @@ public class UserController {
         user.setPassword(password);
         user.setLatitude(0d);
         user.setLongtitude(0d);
+        user.setToken(Authorization.generateToken(20));
 
         userService.add(user);
 

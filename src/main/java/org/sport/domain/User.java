@@ -16,7 +16,7 @@ import java.util.Collection;
 @Table(name = "users")
 public class User {
     @Id
-    @Column(name = "username", unique = true)
+    @Column(name = "username")
     private String username;
     @Column(name = "photo")
     private String photo;
@@ -30,7 +30,7 @@ public class User {
     @Column(name = "latitude")
     private Double latitude;
 
-    @Column(name = "token", unique = true)
+    @Column(name = "token")
     private String token;
 
 }
