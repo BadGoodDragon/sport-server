@@ -1,4 +1,12 @@
 # Конфигурационный файл
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+server:
+  port: 8082
+
 spring:
 
   # Подключение к H2 бд через jdbc
