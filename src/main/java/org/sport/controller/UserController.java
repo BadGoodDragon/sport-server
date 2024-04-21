@@ -21,6 +21,8 @@ public class UserController {
         String username = Authorization.parseBasicUsername(authorization);
         String password = Authorization.parseBasicPassword(authorization);
 
+        if (userService.getByName(username) != null) throw new RuntimeException("Такой пользователь уже существует!");
+
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);

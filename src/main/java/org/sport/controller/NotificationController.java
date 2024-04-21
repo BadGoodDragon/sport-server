@@ -1,2 +1,4 @@
-package org.sport.controller;public class NotificationController {
+package org.sport.controller;
+
+public class NotificationController {
 }

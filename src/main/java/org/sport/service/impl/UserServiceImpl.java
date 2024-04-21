@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         lastUser.setPhoto(user.getPhoto());
         lastUser.setLatitude(user.getLatitude());
         lastUser.setLongtitude(user.getLongtitude());
-        lastUser.setPassword(user.getPassword());
+//        lastUser.setPassword(user.getPassword());
 
         return userRepository.save(lastUser);
     }
